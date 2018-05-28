@@ -33,47 +33,47 @@
 <script>
 import PageMap from '~/assets/js/page-map';
 export default {
-    name: 'NavBar',
-    data() {
-        return {
-            mobileMenu: false
-        }
+  name: 'NavBar',
+  data() {
+    return {
+      mobileMenu: false
+    };
+  },
+  computed: {
+    pages() {
+      return PageMap.pages;
     },
-    computed: {
-        pages() {
-            return PageMap.pages;
-        },
-        desktopMenu() {
-            return !this.mobileMenu;
-        }
-    },
-    methods: {
-        burgerClick: function() {
-            this.mobileMenu = !this.mobileMenu;
-        }
+    desktopMenu() {
+      return !this.mobileMenu;
     }
-}
+  },
+  methods: {
+    burgerClick: function() {
+      this.mobileMenu = !this.mobileMenu;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 #navBar {
-    background-color: $primary-bold;
-    border-bottom: 1px solid grey;
-    a {
-        color: $primary-faint;
-    }
-    a:hover {
-        color: $highlight;
-    }
-    .is-active a {
+  background-color: $primary-bold;
+  border-bottom: 1px solid grey;
+  a {
+    color: $primary-faint;
+  }
+  a:hover {
+    color: $highlight;
+  }
+  .is-active a {
     color: $text-color;
-    }
+  }
 }
 
 #brand_logo {
-    height: $navbar-height;
-    img {
-        height: 100%;
-    }
+  height: $navbar-height;
+  img {
+    height: 100%;
+  }
 }
 </style>

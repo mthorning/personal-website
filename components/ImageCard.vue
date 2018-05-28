@@ -1,8 +1,23 @@
 <template>
 <div id="card" class="card">
+    <div 
+      v-bind:class="['modal', {'is-active': modalShow}]"
+      @click="modalClick"
+    >
+        <div class="modal-background"></div>
+            <div class="modal-content">
+                <img
+                  class="modal_image" 
+                  v-bind:src="image.path"
+                  v-bind:style="{ height, width }"
+                >
+            </div>
+        <button class="modal-close is-large" @click="closeModal"></button>
+    </div>
     <div id="mainImage" class="card-image">
         <figure class="image">
             <img 
+                @click="imageClicked"
                 v-if="image" 
                 v-bind:src="image.path"
             >
@@ -21,37 +36,74 @@
 
 <script>
 export default {
-    name: 'ImageCard',
-    props: {
-        image: Object
+  name: 'ImageCard',
+  props: {
+    image: Object,
+    route: String
+  },
+  data() {
+    return {
+      modalShow: false,
+      portrait: false
+    };
+  },
+  computed: {
+    height() {
+      return this.portrait ? '90vh' : 'auto';
     },
-    computed: {
-        title() {
-            return this.image.path.split('/').pop().split('.')[0].split('_')
-                .join(' ');
-        }
+    width() {
+      return this.portrait ? 'auto' : '100%';
+    },
+    title() {
+      return this.image.path
+        .split('/')
+        .pop()
+        .split('.')[0]
+        .split('_')
+        .join(' ');
+    },
+    url() {
+      return `${this.route}${this.image.id}`;
     }
-}
+  },
+  methods: {
+    imageClicked() {
+      this.modalShow = true;
+    },
+    closeModal() {
+      this.modalShow = false;
+    },
+    modalClick(e) {
+      if (e.target.className !== 'modal_image') {
+        this.closeModal();
+      }
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      const width = this.$el.querySelector('img').width;
+      const height = this.$el.querySelector('img').height;
+
+      if (height >= width) {
+        this.portrait = true;
+      }
+    });
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-    #card {
-        max-width: 350px;
-        padding: 10px;
-        margin: 10px;
-    }
-    #mainImage {
-        width: 100%;
-        height: auto;
-        figure {
-            min-height: 200px;
-            width: 100%;
-            height: auto;
-        }
-        img {
-            width: 100%;
-            height: 100%;
-        }
-        
-    }
+#card {
+  padding: 4px;
+  margin: 4px;
+}
+#mainImage {
+  img {
+    cursor: pointer;
+    height: auto;
+  }
+}
+.modal-content {
+  text-align: center;
+}
 </style>

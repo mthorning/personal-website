@@ -1,0 +1,23 @@
+@import "~/node_modules/bulma/sass/utilities/initial-variables.sass";
+@import "~/node_modules/bulma/sass/utilities/functions.sass";
+//override initial variables
+
+//override functions
+
+//derived variables
+
+//custom colors
+$highlight: #E54B4B;
+
+$text-color: #4a4a4a;
+
+$primary-bold: #1B9AAA;
+$secondary-bold: #FFA987;
+
+$primary-faint: #FFF;
+$secondary-faint: #F7EBE8;
+
+//Add new color variables to color map
+@import "~/node_modules/bulma/sass/utilities/derived-variables.sass";
+
+@import "~/node_modules/bulma/bulma.sass";

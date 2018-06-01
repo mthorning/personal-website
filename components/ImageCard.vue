@@ -1,13 +1,9 @@
 <template>
 <div id="card" class="card">
-  <div id="mainImage">
-    <figure class="image">
-      <img 
-        @click="imageClicked"
-        v-if="image" 
-        v-bind:src="image.path"
-      >
-    </figure>
+  <div id="mainImage"
+    @click="imageClicked"
+    v-bind:style="{ 'background-image': backgroundImage }"
+  >
   </div>
   <div id="imageTitle">
     <div class="media-content">
@@ -61,6 +57,9 @@ export default {
     },
     url() {
       return `${this.route}${this.image.id}`;
+    },
+    backgroundImage() {
+      return `url(${this.image.path})`;
     }
   },
   methods: {
@@ -97,15 +96,14 @@ export default {
   position: relative;
 }
 #mainImage {
-  overflow: hidden;
-  position: absolute;
+  background-size: cover;
+  background-position: center;
   top: 0;
-  height: 100%;
-  img {
-    width: 100%;
-    cursor: pointer;
-    height: auto;
-  }
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: pointer;
 }
 #imageTitle {
   position: absolute;

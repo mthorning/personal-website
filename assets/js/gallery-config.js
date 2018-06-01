@@ -16,7 +16,7 @@ export default {
     },
     {
       id: guid(),
-      path: '/gallery/Holywell_Bay_In_May.jpg',
+      path: '/gallery/Holywell_Bay_in_May.jpg',
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus nec iaculis mauris.`
     },

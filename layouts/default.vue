@@ -3,9 +3,7 @@
   <nav-bar />
   <div id="page" class="container">
     <page-hero v-bind:path="$nuxt.$route.path"/>
-      <div class="container">
-        <nuxt/>
-      </div>
+      <nuxt/>
   </div>
 </div>
 </template>
@@ -19,16 +17,14 @@ export default {
     NavBar,
     PageHero
   }
-}
+};
 </script>
 
 <style lang="scss">
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   color: $text-color;
-}
-#page {
-  margin-top: 40px;
 }
 </style>

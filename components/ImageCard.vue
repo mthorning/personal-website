@@ -1,36 +1,36 @@
 <template>
 <div id="card" class="card">
-    <div 
-      v-bind:class="['modal', {'is-active': modalShow}]"
-      @click="modalClick"
-    >
-        <div class="modal-background"></div>
-            <div class="modal-content">
-                <img
-                  class="modal_image" 
-                  v-bind:src="image.path"
-                  v-bind:style="{ height, width }"
-                >
-            </div>
-        <button class="modal-close is-large" @click="closeModal"></button>
+  <div 
+    v-bind:class="['modal', {'is-active': modalShow}]"
+    @click="modalClick"
+  >
+  <div class="modal-background"></div>
+    <div class="modal-content">
+      <img
+        class="modal_image" 
+        v-bind:src="image.path"
+        v-bind:style="{ height, width }"
+      >
     </div>
-    <div id="mainImage" class="card-image">
-        <figure class="image">
-            <img 
-                @click="imageClicked"
-                v-if="image" 
-                v-bind:src="image.path"
-            >
-        </figure>
+    <button class="modal-close is-large" @click="closeModal"></button>
+  </div>
+  <div id="mainImage" class="card-image">
+    <figure class="image">
+      <img 
+        @click="imageClicked"
+        v-if="image" 
+        v-bind:src="image.path"
+      >
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media-content">
+      <p class="title is-4">{{ title }}</p>
     </div>
-    <div class="card-content">
-        <div class="media-content">
-            <p class="title is-4">{{ title }}</p>
-        </div>
-    </div>
-    <div class="content">
-        {{ image.description }}
-    </div>
+  </div>
+  <footer class="card-footer">
+    <a :href="url" class="card-footer-item">View Details</a>
+  </footer>
 </div>
 </template>
 
@@ -48,19 +48,14 @@ export default {
     };
   },
   computed: {
+    title() {
+      return this.$store.getters.getImageTitle(this.image.id);
+    },
     height() {
       return this.portrait ? '90vh' : 'auto';
     },
     width() {
       return this.portrait ? 'auto' : '100%';
-    },
-    title() {
-      return this.image.path
-        .split('/')
-        .pop()
-        .split('.')[0]
-        .split('_')
-        .join(' ');
     },
     url() {
       return `${this.route}${this.image.id}`;
@@ -86,6 +81,7 @@ export default {
 
       if (height >= width) {
         this.portrait = true;
+        this.$store.commit('addPortrait', this.image.id);
       }
     });
   }

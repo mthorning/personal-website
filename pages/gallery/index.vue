@@ -1,23 +1,22 @@
 <template>
 <div class="container">
-    <div class="columns">
-        <div class="column is-half-tablet is-one-third-desktop 
-            is-one-quarter-widescreen"
-            v-for="(image, i) in images"
-            v-bind:key="i"
-        >
-            <image-card
-                v-bind:image="image"
-                v-bind:route="$route.fullPath"
-            />
-        </div>
+  <div class="columns">
+    <div class="column is-half-tablet is-one-third-desktop 
+      is-one-quarter-widescreen"
+      v-for="(image, i) in images"
+      v-bind:key="i"
+    >
+      <image-card
+        v-bind:image="image"
+        v-bind:route="$route.fullPath"
+      />
     </div>
+  </div>
 </div>
 </template>
 
 <script>
 import ImageCard from '~/components/ImageCard';
-import GalleryConfig from '~/assets/js/gallery-config';
 
 export default {
   components: {
@@ -25,7 +24,7 @@ export default {
   },
   computed: {
     images() {
-      return GalleryConfig.images;
+      return this.$store.state.images;
     }
   }
 };

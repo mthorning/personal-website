@@ -59,7 +59,10 @@ export default {
       return `${this.route}${this.image.id}`;
     },
     backgroundImage() {
-      return `url(${this.image.path})`;
+      const path = this.image.path.split('/');
+      path.splice(-1, 0, 'thumbnails');
+      console.log(path);
+      return `url(${path.join('/')})`;
     }
   },
   methods: {

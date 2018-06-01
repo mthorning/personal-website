@@ -164,6 +164,7 @@ export default {
 }
 #brand_logo {
   height: $navbar-height;
+  margin-right: 4px;
   img {
     height: 100%;
   }

@@ -55,7 +55,10 @@
         </p>
     </div>
   </div>
-  <div v-bind:class="['modal', {'is-active': modalShow}]">
+  <div 
+    v-bind:class="['modal', {'is-active': modalShow}]"
+    @click="modalClick"
+  >
     <div class="modal-background"></div>
       <div class="modal-content">
         <div class="box">
@@ -120,7 +123,10 @@ export default {
       this.mobileMenu = !this.mobileMenu;
     },
     modalClick(e) {
-      if (e.target.className !== 'modal_content') {
+      if (
+        e.target.className === 'modal-background' ||
+        e.target.className === 'modal-close'
+      ) {
         this.modalShow = false;
       }
     },
@@ -153,8 +159,8 @@ export default {
   }
 }
 #emailModalIcon {
-  height: 5em;
-  width: 5em;
+  height: 3em;
+  width: 3em;
 }
 #brand_logo {
   height: $navbar-height;

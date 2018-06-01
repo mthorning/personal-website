@@ -11,7 +11,6 @@ const createStore = () => {
     },
     getters: {
       getImage: state => id => {
-        console.log('getimage', id);
         if (id) {
           return state.images.find(img => img.id === id) || false;
         }

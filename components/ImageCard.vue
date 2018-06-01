@@ -1,10 +1,28 @@
 <template>
 <div id="card" class="card">
+  <div id="mainImage">
+    <figure class="image">
+      <img 
+        @click="imageClicked"
+        v-if="image" 
+        v-bind:src="image.path"
+      >
+    </figure>
+  </div>
+  <div id="imageTitle">
+    <div class="media-content">
+      <p class="title is-4">{{ title }}</p>
+    </div>
+  </div>
+  <footer id="imageLink">
+    <a :href="url">View Details</a>
+  </footer>
+
   <div 
     v-bind:class="['modal', {'is-active': modalShow}]"
     @click="modalClick"
   >
-  <div class="modal-background"></div>
+    <div class="modal-background"></div>
     <div class="modal-content">
       <img
         class="modal_image" 
@@ -14,24 +32,8 @@
     </div>
     <button class="modal-close is-large" @click="closeModal"></button>
   </div>
-  <div id="mainImage" class="card-image">
-    <figure class="image">
-      <img 
-        @click="imageClicked"
-        v-if="image" 
-        v-bind:src="image.path"
-      >
-    </figure>
-  </div>
-  <div class="card-content">
-    <div class="media-content">
-      <p class="title is-4">{{ title }}</p>
-    </div>
-  </div>
-  <footer class="card-footer">
-    <a :href="url" class="card-footer-item">View Details</a>
-  </footer>
 </div>
+
 </template>
 
 <script>
@@ -90,15 +92,45 @@ export default {
 
 <style lang="scss" scoped>
 #card {
-  padding: 4px;
-  margin: 4px;
+  width: 100%;
+  padding-bottom: 100%;
+  position: relative;
 }
 #mainImage {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  height: 100%;
   img {
+    width: 100%;
     cursor: pointer;
     height: auto;
   }
 }
+#imageTitle {
+  position: absolute;
+  z-index: 1;
+  bottom: 0px;
+  padding: 12px 4px 52px;
+  background-color: $primary-faint;
+  width: 100%;
+}
+#imageLink {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  background-color: $primary-faint;
+  width: 100%;
+  padding: 4px;
+  text-align: right;
+  a {
+    color: $secondary-bold;
+  }
+  a:hover {
+    color: $highlight;
+  }
+}
+
 .modal-content {
   text-align: center;
 }

@@ -21,10 +21,4 @@ export default {
 </script>
 
 <style lang="scss">
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  color: $text-color;
-}
 </style>

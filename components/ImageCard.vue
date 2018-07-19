@@ -2,7 +2,7 @@
 <div id="card" class="card">
   <div id="mainImage"
     @click="imageClicked"
-    v-bind:style="{ 'background-image': backgroundImage }"
+    v-bind:style="{ backgroundImage }"
   >
   </div>
   <div id="imageTitle">
@@ -11,7 +11,9 @@
     </div>
   </div>
   <footer id="imageLink">
-    <a :href="url">View Details</a>
+    <a :href="url" class="icon">
+      <font-awesome-icon :icon="externalLinkIcon" />
+    </a>
   </footer>
 
   <div 
@@ -33,8 +35,13 @@
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortAwesome/vue-fontawesome';
+import externalLinkIcon from '@fortAwesome/fontawesome-free-solid/faExternalLinkAlt';
 export default {
   name: 'ImageCard',
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     image: Object,
     route: String
@@ -42,7 +49,8 @@ export default {
   data() {
     return {
       modalShow: false,
-      portrait: false
+      portrait: false,
+      externalLinkIcon
     };
   },
   computed: {
@@ -61,7 +69,6 @@ export default {
     backgroundImage() {
       const path = this.image.path.split('/');
       path.splice(-1, 0, 'thumbnails');
-      console.log(path);
       return `url(${path.join('/')})`;
     }
   },

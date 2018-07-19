@@ -34,7 +34,7 @@ export default {
 .columns {
   align-items: center;
   flex-wrap: wrap;
-  padding: 0 10vh;
+  padding: 0 8vw;
 }
 </style>
 

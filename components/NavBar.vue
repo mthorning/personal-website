@@ -1,8 +1,9 @@
 <template>
 <nav id="navBar" class="navbar" role="navigation">
   <div class="navbar-brand is-expanded">
-    <a href='/'  id="brand_logo">
-      <img src="/logo.png"></a> 
+    <a href='/'  id="brandLogo">
+      <img src="/logo-clear.png">
+    </a> 
     <a 
       class="navbar-burger" 
       role="button" 
@@ -27,7 +28,7 @@
         <p class="buttons is-grouped">
            <a 
             class="button is-small is-outlined is-inverted"
-            @click="showModal"
+            @click="toggleEmailModal"
           >
             <span class="icon">
               <font-awesome-icon :icon="emailIcon" />
@@ -55,37 +56,10 @@
         </p>
     </div>
   </div>
-  <div 
-    v-bind:class="['modal', {'is-active': modalShow}]"
-    @click="modalClick"
-  >
-    <div class="modal-background"></div>
-      <div class="modal-content">
-        <div class="box">
-          <article class="media">
-            <div class="media-left">
-              <span class="icon is-large">
-                <font-awesome-icon id="emailModalIcon" :icon="envelopeIcon" />
-              </span>
-            </div>
-            <div class="media">
-              <div class="content">
-                <h5>Please feel free to send me an email.</h5>
-                <p>
-                  You can email about my photos or if you wish to discuss your 
-                  requirements for a website. Drop me a line: <strong>
-                    <a href="mailto:matthewthorning@gmail.com">
-                      matthewthorning@gmail.com
-                    </a>
-                  </strong>
-                </p>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-      <button class="modal-close is-large" aria-label="close"></button>
-  </div>
+  <email-modal 
+    v-on:email-close="toggleEmailModal" 
+    v-bind:modalShow="emailModalShow" 
+  />
 </nav>
 </template>
 
@@ -94,21 +68,21 @@ import FontAwesomeIcon from '@fortAwesome/vue-fontawesome';
 import gitHubIcon from '@fortAwesome/fontawesome-free-brands/faGithub';
 import twitterIcon from '@fortAwesome/fontawesome-free-brands/faTwitter';
 import emailIcon from '@fortAwesome/fontawesome-free-solid/faAt';
-import envelopeIcon from '@fortAwesome/fontawesome-free-solid/faEnvelope';
+import emailModal from '~/components/emailModal';
 export default {
   name: 'NavBar',
   data() {
     return {
       mobileMenu: false,
-      modalShow: false,
+      emailModalShow: false,
       gitHubIcon,
       twitterIcon,
-      emailIcon,
-      envelopeIcon
+      emailIcon
     };
   },
   components: {
-    FontAwesomeIcon
+    FontAwesomeIcon,
+    emailModal
   },
   computed: {
     pages() {
@@ -122,16 +96,8 @@ export default {
     burgerClick: function() {
       this.mobileMenu = !this.mobileMenu;
     },
-    modalClick(e) {
-      if (
-        e.target.className === 'modal-background' ||
-        e.target.className === 'modal-close'
-      ) {
-        this.modalShow = false;
-      }
-    },
-    showModal() {
-      this.modalShow = true;
+    toggleEmailModal() {
+      this.emailModalShow = !this.emailModalShow;
     }
   }
 };
@@ -141,7 +107,7 @@ export default {
 #navBar {
   background-color: $primary-bold;
   border-bottom: 1px solid grey;
-  padding: 0 8px;
+  padding: 0 8px 0 0;
   a {
     color: $primary-faint;
   }
@@ -158,15 +124,14 @@ export default {
     background-color: $primary-faint;
   }
 }
-#emailModalIcon {
-  height: 3em;
-  width: 3em;
-}
-#brand_logo {
+#brandLogo {
   height: $navbar-height;
-  margin-right: 4px;
+  padding: 8px;
   img {
     height: 100%;
   }
+}
+#brandLogo:hover > img {
+  background-color: $highlight;
 }
 </style>

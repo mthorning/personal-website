@@ -1,5 +1,6 @@
-@import "~/node_modules/bulma/sass/utilities/initial-variables.sass";
-@import "~/node_modules/bulma/sass/utilities/functions.sass";
+@import '~/node_modules/bulma/sass/utilities/initial-variables.sass';
+@import '~/node_modules/bulma/sass/utilities/functions.sass';
+
 //override initial variables
 
 //override functions
@@ -7,17 +8,17 @@
 //derived variables
 
 //custom colors
-$highlight: #E54B4B;
+$highlight: #e54b4b;
 
 $text-color: #4a4a4a;
 
-$primary-bold: #1B9AAA;
-$secondary-bold: #FFA987;
+$primary-bold: #1b9aaa;
+$secondary-bold: #ffa987;
 
-$primary-faint: #FFF;
-$secondary-faint: #F7EBE8;
+$primary-faint: #fff;
+$secondary-faint: #f7ebe8;
 
 //Add new color variables to color map
-@import "~/node_modules/bulma/sass/utilities/derived-variables.sass";
+@import '~/node_modules/bulma/sass/utilities/derived-variables.sass';
 
-@import "~/node_modules/bulma/bulma.sass";
+@import '~/node_modules/bulma/bulma.sass';

@@ -1,18 +1,20 @@
 <template>
-<div>
-  <nav-bar />
-  <nuxt />
-</div>
+<nuxt />
 </template>
 
 <script>
-import NavBar from '~/components/NavBar';
-
-export default {
-  components: {
-    NavBar
-  }
-}
 </script>
+
+<style lang="scss">
+html {
+  font-family: 'Comfortaa', cursive;
+  font-size: 16px;
+  color: $text-color;
+}
+body {
+  background: url('/logo.png') no-repeat center 10% fixed;
+  background-size: 40vh 40vh;
+}
+</style>
 
 

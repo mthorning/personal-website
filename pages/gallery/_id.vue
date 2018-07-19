@@ -1,19 +1,18 @@
 <template>
   <div class="container">
     <div class="columns content_wrapper">
-      <section id="imageWrapper" class="column is-8">
-        <img 
-          v-if="image"
-          v-bind:src="image.path || ''"
-          v-bind:style="{ height, width }"
-        />
-      </section>
-      <section class="blurb column is-4">
+      <div 
+        id="imageWrapper" 
+        class="column is-8"
+        v-bind:style="{ backgroundImage }"
+      >
+      </div>
+      <div class="blurb column is-4">
         <div class="content">
           <h1>{{ title }}</h1>
           <p>{{ image.description }}</p>
         </div>
-      </section>
+      </div>
     </div>
   </div>
 </template>
@@ -28,11 +27,8 @@ export default {
     title() {
       return this.$store.getters.getImageTitle(this.id);
     },
-    height() {
-      return this.$store.getters.isPortrait(this.id) ? '90vh' : 'auto';
-    },
-    width() {
-      return this.$store.getters.isPortrait(this.id) ? 'auto' : '100%';
+    backgroundImage() {
+      return `url(${this.image.path})`;
     }
   },
   beforeCreate() {
@@ -45,17 +41,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content_wrapper {
-  display: flex;
-  height: 90vh;
-  justify-content: center;
-  align-items: center;
-  .blurb {
-    height: 60%;
+@media (max-width: 845px) {
+  .container {
+    padding: 0 4vw;
   }
 }
 #imageWrapper {
-  max-height: 90vh;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+}
+.blurb {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20%;
 }
 </style>
 
